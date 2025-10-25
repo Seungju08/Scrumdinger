@@ -1,0 +1,49 @@
+//
+//  DailyScrum.swift
+//  Scrumdinger
+//
+//  Created by 추승주 on 10/25/25.
+//
+
+import Foundation
+import ThemeKit
+
+struct DailyScrum: Identifiable {
+    let id: UUID
+    var title: String
+    var attendees: [Attendee]
+    var lengthInMinutes: Int
+    var lengthInMinutesAsDouble: Double {
+        get {
+            Double(lengthInMinutes)
+        }
+        set {
+            lengthInMinutes = Int(newValue)
+        }
+    }
+    var theme: Theme
+    
+    init(id: UUID = UUID(), title: String, attendess: [String], lengthInMinutes: Int, theme: Theme) {
+        self.id = id
+        self.title = title
+        self.attendees = attendess.map { Attendee(name: $0) }
+        self.lengthInMinutes = lengthInMinutes
+        self.theme = theme
+    }
+}
+
+extension DailyScrum {
+    struct Attendee: Identifiable {
+        let id: UUID
+        var name: String
+        
+        init(id: UUID = UUID(), name: String) {
+            self.id = id
+            self.name = name
+        }
+    }
+    
+    static var emptyScrum: DailyScrum {
+        DailyScrum(title: "", attendess: [], lengthInMinutes: 5, theme: .sky)
+    }
+}
