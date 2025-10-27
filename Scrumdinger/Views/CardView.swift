@@ -10,6 +10,7 @@ import ThemeKit
 
 struct CardView: View {
     let scrum: DailyScrum
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(scrum.title)
@@ -21,8 +22,8 @@ struct CardView: View {
                     .accessibilityLabel("\(scrum.attendees.count) attendees")
                 Spacer()
                 Label("\(scrum.lengthInMinutes)", systemImage: "clock")
+                    .accessibilityLabel("\(scrum.lengthInMinutes) minute meeting")
                     .labelStyle(.trailingIcon)
-                    .accessibilityLabel("\(scrum.lengthInMinutes) minute metting")
             }
             .font(.caption)
         }
